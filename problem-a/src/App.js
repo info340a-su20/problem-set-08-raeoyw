@@ -9,10 +9,12 @@ const EXAMPLE_SENATORS = [
 /* Your code goes here */
 export class App extends Component {
   render() {
+    let senators = this.props.senators;
+
     return (
       <div className="container">
         <h1>US Senators 2019</h1>
-        <SenatorTable />
+        <SenatorTable senators={senators} />
       </div>
     )
   }
@@ -20,12 +22,12 @@ export class App extends Component {
 
 export class SenatorTable extends Component {
   render() {
+    let senators = this.props.senators;
+
     return (
       <table className="table table-bordered">
         <TableHeader cols={["Name", "State", "Phone", "Twitter"]} />
-
-        <SenatorRow senator={EXAMPLE_SENATORS} />
-
+        <SenatorRow senators={senators} />
       </table>
     )
   }
@@ -50,8 +52,8 @@ export class TableHeader extends Component {
 
 export class SenatorRow extends Component {
   render() {
-    let senatorRow = this.props.senator.map((senatorName) => {
-      return ([
+    let senatorRow = this.props.senators.map((senatorName) => {
+      return (
         <tr>
           <td key={senatorName}>{senatorName.name}</td>
           <td key={senatorName}>{senatorName.party.charAt(0)} - {senatorName.state}</td>
@@ -62,7 +64,7 @@ export class SenatorRow extends Component {
           <a href="https://twitter.com/{senatorName.twitter}">@{senatorName.twitter}</a>
           </td>
         </tr>
-      ])
+      )
     });
 
     return (
